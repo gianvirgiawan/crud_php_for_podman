@@ -1,6 +1,5 @@
 name: myapp
 services:
-  # Service untuk database MariaDB
   mariadb-gian:
     build:
       context: .
@@ -17,7 +16,6 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
 
-  # Service untuk aplikasi web PHP
   php-apache-gian:
     build:
       context: .
@@ -37,7 +35,6 @@ services:
     depends_on:
       - mariadb-gian
 
-  # Service untuk PhpMyAdmin
   phpmyadmin-gian:
     image: docker.io/phpmyadmin/phpmyadmin
     container_name: phpmyadmin-gian

@@ -15,7 +15,6 @@ if (isset($_POST['submit'])) {
 
     // Kirim header redirect
     header("location:index.php");
-    // PENTING: Hentikan eksekusi skrip setelah redirect
     exit;
 }
 ?>
