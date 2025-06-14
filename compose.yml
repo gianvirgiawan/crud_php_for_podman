@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # Service untuk database MariaDB
+  mariadb-gian:
+    build:
+      context: .
+      dockerfile: mariadb.Containerfile
+    container_name: mariadb-gian
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_123
+      MYSQL_DATABASE: db_akademik
+      MYSQL_USER: user_gian
+      MYSQL_PASSWORD: user_password_123
+    ports:
+      - "3306:3306" # <-- TAMBAHKAN 2 SPASI DI SINI
+    volumes:
+      - mariadb_data:/var/lib/mysql # <-- TAMBAHKAN 2 SPASI DI SINI
+
+  # Service untuk aplikasi web PHP
+  php-apache-gian:
+    build:
+      context: .
+      dockerfile: php-apache.Containerfile
+    container_name: php-apache-gian
+    restart: always
+    ports:
+      - "8000:80" # <-- TAMBAHKAN 2 SPASI DI SINI
+    volumes:
+      - ./src:/var/www/html # <-- TAMBAHKAN 2 SPASI DI SINI
+    environment:
+      DB_HOST: mariadb-gian
+      DB_NAME: db_akademik
+      DB_USER: user_gian
+      DB_PASS: user_password_123
+      DB_PORT: 3306
+    depends_on:
+      - mariadb-gian
+
+  # Service untuk PhpMyAdmin
+  phpmyadmin-gian:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-gian
+    restart: always
+    ports:
+      - "8001:80" # <-- TAMBAHKAN 2 SPASI DI SINI
+    environment:
+      PMA_HOST: mariadb-gian
+      PMA_PORT: 3306
+    depends_on:
+      - mariadb-gian
+
+volumes:
+  mariadb_data:
