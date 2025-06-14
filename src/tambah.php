@@ -1,3 +1,25 @@
+<?php
+// --- BLOK PHP DIPINDAHKAN KE ATAS ---
+// Cek jika form sudah disubmit
+if (isset($_POST['submit'])) {
+    // Sertakan file koneksi
+    include 'koneksi.php';
+
+    // Ambil data dari form
+    $kode_mk = $_POST['kode_mk'];
+    $nama_mk = $_POST['nama_mk'];
+    $sks = $_POST['sks'];
+
+    // Query untuk menyimpan data
+    $query = "INSERT INTO matakuliah (kode_mk, nama_mk, sks) VALUES ('$kode_mk', '$nama_mk', '$sks')";
+    mysqli_query($koneksi, $query);
+
+    // Kirim header redirect
+    header("location:index.php");
+    // PENTING: Hentikan eksekusi skrip setelah redirect
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,18 +35,5 @@
         SKS: <input type="number" name="sks" required><br/><br/>
         <input type="submit" name="submit" value="Simpan">
     </form>
-
-    <?php
-    if(isset($_POST['submit'])) {
-        include 'koneksi.php';
-        $kode_mk = $_POST['kode_mk'];
-        $nama_mk = $_POST['nama_mk'];
-        $sks = $_POST['sks'];
-
-        $query = "INSERT INTO matakuliah (kode_mk, nama_mk, sks) VALUES ('$kode_mk', '$nama_mk', '$sks')";
-        mysqli_query($koneksi, $query);
-        header("location:index.php");
-    }
-    ?>
 </body>
 </html>
