@@ -1,5 +1,4 @@
 <?php
-// --- BLOK PHP DIPINDAHKAN KE ATAS ---
 // Cek jika form sudah disubmit
 if (isset($_POST['submit'])) {
     // Sertakan file koneksi

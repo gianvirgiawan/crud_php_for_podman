@@ -1,5 +1,4 @@
-version: '3.8'
-
+name: myapp
 services:
   # Service untuk database MariaDB
   mariadb-gian:
@@ -40,7 +39,6 @@ services:
 
   # Service untuk PhpMyAdmin
   phpmyadmin-gian:
-    # PERBAIKAN: Gunakan nama image yang lengkap untuk Podman
     image: docker.io/phpmyadmin/phpmyadmin
     container_name: phpmyadmin-gian
     restart: always
