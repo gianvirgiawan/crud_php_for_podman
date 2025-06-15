@@ -1,7 +1,6 @@
 <?php
 // Cek jika form sudah disubmit
 if (isset($_POST['submit'])) {
-    // Sertakan file koneksi
     include 'koneksi.php';
 
     // Ambil data dari form
