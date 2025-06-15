@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: root_password_123
       MYSQL_DATABASE: db_akademik
       MYSQL_USER: gian
-      MYSQL_PASSWORD: gian
+      MYSQL_PASSWORD: 123
     ports:
       - "3306:3306"
     volumes:
@@ -30,7 +30,7 @@ services:
       DB_HOST: mariadb-gian
       DB_NAME: db_akademik
       DB_USER: gian
-      DB_PASS: gian
+      DB_PASS: 123
       DB_PORT: 3306
     depends_on:
       - mariadb-gian
