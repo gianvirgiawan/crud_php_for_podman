@@ -7,7 +7,7 @@ services:
     container_name: mariadb-gian
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_ROOT_PASSWORD: root_password_123
       MYSQL_DATABASE: db_akademik
       MYSQL_USER: gian
       MYSQL_PASSWORD: gian
@@ -29,8 +29,8 @@ services:
     environment:
       DB_HOST: mariadb-gian
       DB_NAME: db_akademik
-      DB_USER: user_gian
-      DB_PASS: user_password_123
+      DB_USER: gian
+      DB_PASS: gian
       DB_PORT: 3306
     depends_on:
       - mariadb-gian
