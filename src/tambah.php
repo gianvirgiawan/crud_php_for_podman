@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $sks = $_POST['sks'];
 
     // Query untuk menyimpan data
-    $query = "INSERT INTO matakuliah (kode_mk, nama_mk, sks) VALUES ('$kode_mk', '$nama_mk', '$sks')";
+    $query = "INSERT INTO mata_kuliah (kode_mk, nama_mk, sks) VALUES ('$kode_mk', '$nama_mk', '$sks')";
     mysqli_query($koneksi, $query);
 
     // Kirim header redirect

@@ -10,7 +10,7 @@
     <?php
     include 'koneksi.php';
     $id = $_GET['id'];
-    $query = mysqli_query($koneksi, "SELECT * FROM matakuliah WHERE id='$id'");
+    $query = mysqli_query($koneksi, "SELECT * FROM mata_kuliah WHERE id='$id'");
     while($data = mysqli_fetch_array($query)){
     ?>
     <form action="edit.php?id=<?php echo $id; ?>" method="post">
@@ -27,7 +27,7 @@
         $nama_mk = $_POST['nama_mk'];
         $sks = $_POST['sks'];
 
-        $query = "UPDATE matakuliah SET kode_mk='$kode_mk', nama_mk='$nama_mk', sks='$sks' WHERE id='$id'";
+        $query = "UPDATE mata_kuliah SET kode_mk='$kode_mk', nama_mk='$nama_mk', sks='$sks' WHERE id='$id'";
         mysqli_query($koneksi, $query);
         header("location:index.php");
     }

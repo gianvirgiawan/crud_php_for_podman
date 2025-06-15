@@ -18,7 +18,7 @@
         <?php
         include 'koneksi.php';
         // Menampilkan seluruh data dari tabel 
-        $query = mysqli_query($koneksi, "SELECT * FROM matakuliah ORDER BY id DESC");
+        $query = mysqli_query($koneksi, "SELECT * FROM mata_kuliah ORDER BY id DESC");
         while($data = mysqli_fetch_array($query)){
         ?>
             <tr>
