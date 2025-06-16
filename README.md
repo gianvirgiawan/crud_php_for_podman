@@ -11,21 +11,21 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
 
 ## ✨ Fitur
 
-* **Create**: Menambah data mata kuliah baru ke dalam database.
-* **Read**: Menampilkan seluruh daftar mata kuliah yang ada.
-* **Update**: Mengubah informasi mata kuliah yang sudah ada.
-* **Delete**: Menghapus data mata kuliah dari database.
+- **Create**: Menambah data mata kuliah baru ke dalam database.
+- **Read**: Menampilkan seluruh daftar mata kuliah yang ada.
+- **Update**: Mengubah informasi mata kuliah yang sudah ada.
+- **Delete**: Menghapus data mata kuliah dari database.
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-* **Aplikasi Web**: PHP 8.2
-* **Web Server**: Apache
-* **Database**: MariaDB
-* **Container Engine**: Podman v4.9.3
-* **Orkestrasi**: `podman-compose` 1.0.6
-* **Manajemen Database**: PhpMyAdmin
+- **Aplikasi Web**: PHP 8.2
+- **Web Server**: Apache
+- **Database**: MariaDB
+- **Container Engine**: Podman v4.9.3
+- **Orkestrasi**: `podman-compose` 1.0.6
+- **Manajemen Database**: PhpMyAdmin
 
 ---
 
@@ -39,10 +39,10 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
 |   |-- edit.php              # Halaman edit data (Update)
 |   |-- hapus.php             # Script penghapus data (Delete)
 |   |-- koneksi.php           # Script koneksi ke database
-|-- init.sql                  # Script inisialisasi database (DDL & DML) 
-|-- php-apache.Containerfile  # Script build untuk image PHP-Apache 
-|-- mariadb.Containerfile     # Script build untuk image MariaDB 
-|-- compose.yml               # File utama untuk orkestrasi semua layanan 
+|-- init.sql                  # Script inisialisasi database (DDL & DML)
+|-- php-apache.Containerfile  # Script build untuk image PHP-Apache
+|-- mariadb.Containerfile     # Script build untuk image MariaDB
+|-- compose.yml               # File utama untuk orkestrasi semua layanan
 └── README.md                 # Dokumentasi ini
 ```
 
@@ -50,16 +50,17 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
 
 ## ⚙️ Prasyarat
 
-* **Podman**
-* **`podman-compose`** (bisa diinstal via `pip` atau manajer paket sistem seperti `apt` atau `dnf`)
+- **Podman**
+- **`podman-compose`** (bisa diinstal via `pip` atau manajer paket sistem seperti `apt` atau `dnf`)
 
 ---
 
 ## 🚀 Instalasi dan Konfigurasi
 
 1.  **Clone Repositori**
+
     ```bash
-    git clone [https://github.com/gianvirgiawan/crud_php_for_podman](https://github.com/gianvirgiawan/crud_php_for_podman)
+    git clone https://github.com/gianvirgiawan/crud_php_for_podman
     cd crud_php_for_podman
     ```
 
@@ -70,11 +71,13 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
     Jika Anda menjalankan proyek ini di sistem operasi yang menggunakan SELinux (seperti Red Hat), Anda **wajib** mengedit file `compose.yml` untuk memberikan izin akses volume pada container.
 
     Ubah bagian `volumes` pada service `php-apache` menjadi seperti ini:
+
     ```yaml
     # ... di dalam service php-apache-namapanggilan
     volumes:
       - ./src:/var/www/html:z
     ```
+
     Penambahan `:z` akan secara otomatis mengatur konteks keamanan SELinux yang benar.
 
 ---
@@ -83,9 +86,11 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
 
 1.  **Jalankan Semua Layanan**
     Buka terminal di direktori utama proyek dan jalankan perintah:
+
     ```bash
     podman-compose up -d
     ```
+
     Perintah ini akan membangun image yang diperlukan dan menjalankan semua container di latar belakang.
 
 2.  **Verifikasi Container**
@@ -101,19 +106,21 @@ Proyek aplikasi CRUD (Create, Read, Update, Delete) sederhana yang dibangun meng
 
 Setelah semua container berjalan, Anda bisa mengakses layanan melalui browser:
 
-* **Aplikasi Web CRUD**:
-    * **URL**: `http://localhost:8000` (atau `http://<IP_Server_Anda>:8000`)
-    * Halaman ini akan menampilkan daftar mata kuliah awal dari database.
+- **Aplikasi Web CRUD**:
 
-* **PhpMyAdmin**:
-    * **URL**: `http://localhost:8001` (atau `http://<IP_Server_Anda>:8001`) 
-    * **Server**: Nama service database Anda (contoh: `mariadb-gian`)
-    * **Username**: Sesuai `MYSQL_USER` di `compose.yml`
-    * **Password**: Sesuai `MYSQL_PASSWORD` di `compose.yml`
+  - **URL**: `http://localhost:8000` (atau `http://<IP_Server_Anda>:8000`)
+  - Halaman ini akan menampilkan daftar mata kuliah awal dari database.
+
+- **PhpMyAdmin**:
+  - **URL**: `http://localhost:8001` (atau `http://<IP_Server_Anda>:8001`)
+  - **Server**: Nama service database Anda (contoh: `mariadb-gian`)
+  - **Username**: Sesuai `MYSQL_USER` di `compose.yml`
+  - **Password**: Sesuai `MYSQL_PASSWORD` di `compose.yml`
 
 ### 🔥 Khusus untuk Pengguna Red Hat
 
 Jangan lupa untuk membuka port di firewall Anda agar aplikasi bisa diakses dari luar VM:
+
 ```bash
 sudo firewall-cmd --add-port=8000/tcp --permanent
 sudo firewall-cmd --add-port=8001/tcp --permanent
@@ -125,9 +132,11 @@ sudo firewall-cmd --reload
 ## 🛑 Menghentikan Aplikasi
 
 Untuk menghentikan semua layanan yang berjalan:
+
 ```bash
 podman-compose down
 ```
+
 Perintah ini akan menghentikan dan menghapus container, tetapi tidak akan menghapus data database Anda karena disimpan di volume persisten.
 
 ---
@@ -155,8 +164,6 @@ Jika Anda ingin menghapus semua data dan memulai dari awal (misalnya setelah men
 
 ---
 
-## 🤝 Kontribusi
-
-Merasa ada yang bisa ditingkatkan? Silakan buat *Pull Request*. Kontribusi dalam bentuk apa pun sangat kami hargai!
+## Thanks
 
 ---
