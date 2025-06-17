@@ -25,7 +25,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www/html:z
     environment:
       DB_HOST: mariadb-gian
       DB_NAME: db_akademik
