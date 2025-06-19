@@ -1,36 +1,20 @@
 <?php
-// Cek jika form sudah disubmit
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include 'koneksi.php';
 
-    // Ambil data dari form
-    $kode_mk = $_POST['kode_mk'];
-    $nama_mk = $_POST['nama_mk'];
-    $sks = $_POST['sks'];
+    $nama_pelanggan = mysqli_real_escape_string($koneksi, $_POST['nama_pelanggan']);
+    $judul_film = mysqli_real_escape_string($koneksi, $_POST['judul_film']);
+    $jumlah_tiket = (int)$_POST['jumlah_tiket'];
+    $jadwal_tayang = mysqli_real_escape_string($koneksi, $_POST['jadwal_tayang']);
+    $nomor_kursi = mysqli_real_escape_string($koneksi, $_POST['nomor_kursi']);
+    $total_harga = $jumlah_tiket * HARGA_PER_TIKET;
+    $status_pembayaran = 'Belum Bayar';
+    
+    $query = "INSERT INTO pemesanan (nama_pelanggan, judul_film, jumlah_tiket, jadwal_tayang, nomor_kursi, total_harga, status_pembayaran) 
+              VALUES ('$nama_pelanggan', '$judul_film', $jumlah_tiket, '$jadwal_tayang', '$nomor_kursi', $total_harga, '$status_pembayaran')";
 
-    // Query untuk menyimpan data
-    $query = "INSERT INTO mata_kuliah (kode_mk, nama_mk, sks) VALUES ('$kode_mk', '$nama_mk', '$sks')";
     mysqli_query($koneksi, $query);
-
-    // Kirim header redirect
-    header("location:index.php");
-    exit;
 }
+header('Location: index.php');
+exit;
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Mata Kuliah</title>
-</head>
-<body>
-    <h2>Tambah Mata Kuliah Baru</h2>
-    <a href="index.php">Kembali</a>
-    <br/><br/>
-    <form action="tambah.php" method="post">
-        Kode MK: <input type="text" name="kode_mk" required><br/><br/>
-        Nama MK: <input type="text" name="nama_mk" required><br/><br/>
-        SKS: <input type="number" name="sks" required><br/><br/>
-        <input type="submit" name="submit" value="Simpan">
-    </form>
-</body>
-</html>

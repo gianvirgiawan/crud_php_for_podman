@@ -1,4 +1,4 @@
-name: myapp
+name: gian-bioskop
 services:
   mariadb-gian:
     build:
@@ -7,8 +7,8 @@ services:
     container_name: mariadb-gian
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password_123
-      MYSQL_DATABASE: db_akademik
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: db_bioskop
       MYSQL_USER: gian
       MYSQL_PASSWORD: 123
     ports:
@@ -28,7 +28,7 @@ services:
       - ./src:/var/www/html:z
     environment:
       DB_HOST: mariadb-gian
-      DB_NAME: db_akademik
+      DB_NAME: db_bioskop
       DB_USER: gian
       DB_PASS: 123
       DB_PORT: 3306
